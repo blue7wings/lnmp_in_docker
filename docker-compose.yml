@@ -1,0 +1,48 @@
+nginx:
+    build: ./nginx/
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - app
+
+php:
+    build: ./php/
+    expose:
+        - 9000
+    links:
+        - mysql
+    volumes_from:
+        - app
+
+app:
+    image: daocloud.io/busybox
+    volumes:
+        - ./code:/var/www/html
+    command: "true"
+
+mysql:
+    image: daocloud.io/mysql:latest
+    volumes_from:
+        - data
+    environment:
+        MYSQL_ROOT_PASSWORD: secret
+        MYSQL_DATABASE: project
+        MYSQL_USER: project
+        MYSQL_PASSWORD: project
+
+data:
+    image: daocloud.io/mysql:latest
+    volumes:
+        - /var/lib/mysql
+    command: "true"
+
+phpmyadmin:
+    image: index.docker.io/phpmyadmin/phpmyadmin 
+    ports:
+        - 8080:80
+    links:
+        - mysql
+    environment:
+        PMA_HOST: mysql
