@@ -5,7 +5,7 @@ nginx:
     links:
         - php
     volumes_from:
-        - app
+        - volume
 
 php:
     build: ./php/
@@ -14,13 +14,13 @@ php:
     links:
         - mysql
     volumes_from:
-        - app
+        - volume
 
-app:
-    image: daocloud.io/busybox
+volume:
+    build: ./volume/
     volumes:
         - ./code:/var/www/html
-    command: "true"
+    command: sleep infinity
 
 mysql:
     image: daocloud.io/mysql:latest
