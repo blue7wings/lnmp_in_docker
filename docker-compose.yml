@@ -19,18 +19,18 @@ php:
 volume:
     build: ./volume/
     volumes:
-        - ./code:/var/www/html
-    command: sleep infinity
+        - ./code:/root
+    command: chmod -R 775 /root
+    command: sleep infinity #keep alive 
 
 mysql:
     image: daocloud.io/mysql:latest
     volumes_from:
         - data
     environment:
-        MYSQL_ROOT_PASSWORD: secret
-        MYSQL_DATABASE: project
-        MYSQL_USER: project
-        MYSQL_PASSWORD: project
+        MYSQL_ROOT_PASSWORD: password1
+        MYSQL_USER: user1
+        MYSQL_PASSWORD: password1
 
 data:
     image: daocloud.io/mysql:latest
