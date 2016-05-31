@@ -1,7 +1,7 @@
 nginx:
     build: ./nginx/
     ports:
-        - 80:80
+        - 8089:80
     links:
         - php
     volumes_from:
@@ -19,8 +19,8 @@ php:
 volume:
     build: ./volume/
     volumes:
-        - ./code:/root
-    command: chmod -R 775 /root
+        - ./code:/data/code
+    command: chmod -R 775 /root/code
     command: sleep infinity #keep alive 
 
 mysql:
@@ -41,7 +41,7 @@ data:
 phpmyadmin:
     image: index.docker.io/phpmyadmin/phpmyadmin 
     ports:
-        - 8080:80
+        - 8088:80
     links:
         - mysql
     environment:
