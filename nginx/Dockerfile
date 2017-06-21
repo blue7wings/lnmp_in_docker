@@ -1,3 +1,3 @@
-FROM daocloud.io/nginx:latest
+FROM nginx
 
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY ./default_nginx.conf /etc/nginx/conf.d/default.conf

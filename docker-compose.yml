@@ -1,48 +1,21 @@
-nginx:
-    build: ./nginx/
-    ports:
-        - 8089:80
-    links:
-        - php
-    volumes_from:
-        - volume
+cool_nginx:
+  build: ./nginx
+  ports:
+    - "80:80"
+  volumes:
+    # source
+    - ./src/:/usr/share/nginx/html
+  links:
+    - cool_php_fpm
 
-php:
-    build: ./php/
-    expose:
-        - 9000
-    links:
-        - mysql
-    volumes_from:
-        - volume
-
-volume:
-    build: ./volume/
+cool_php_fpm:
+    build: ./php-fpm
     volumes:
-        - ./code:/data/code
-    command: chmod -R 775 /root/code
-    command: sleep infinity #keep alive 
-
-mysql:
-    image: daocloud.io/mysql:latest
-    volumes_from:
-        - data
-    environment:
-        MYSQL_ROOT_PASSWORD: password1
-        MYSQL_USER: user1
-        MYSQL_PASSWORD: password1
-
-data:
-    image: daocloud.io/mysql:latest
-    volumes:
-        - /var/lib/mysql
-    command: "true"
-
-phpmyadmin:
-    image: index.docker.io/phpmyadmin/phpmyadmin 
-    ports:
-        - 8088:80
+        - ./src/:/usr/share/nginx/html
     links:
-        - mysql
+        - cool_mysql
+
+cool_mysql:
+    image: mysql
     environment:
-        PMA_HOST: mysql
+    - MYSQL_ROOT_PASSWORD=123456
