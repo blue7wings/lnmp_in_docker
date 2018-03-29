@@ -215,7 +215,7 @@ cool_nginx:
     - "80:80"
   volumes:
     # source
-    - ./src/:/usr/share/nginx/htm
+    - ./src/:/usr/share/nginx/html
 ```
 想要重新构建Nginx容器就变得很简单：
 ```
