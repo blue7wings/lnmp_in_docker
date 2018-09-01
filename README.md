@@ -162,7 +162,7 @@ php:7.0-fpm
 ```
 链接之后，PHP容器和MySQL容器能够通信了，但是还是不够呢(坚持一下，最后一步了)，初始PHP是没有安装MySQL扩展的，安装扩张也极其容易，先进入到PHP容器：
 ```
-> docker exec -it cool_php bash
+> docker exec -it cool_php_fpm bash
 ```
 然后用`docker-php-ext-install`命令安装：
 ```

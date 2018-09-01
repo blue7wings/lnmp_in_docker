@@ -1,4 +1,5 @@
 cool_nginx:
+  container_name: nginx
   build: ./nginx
   ports:
     - "80:80"
@@ -9,6 +10,7 @@ cool_nginx:
     - cool_php_fpm
 
 cool_php_fpm:
+    container_name: php_fpm
     build: ./php-fpm
     volumes:
         - ./src/:/usr/share/nginx/html
@@ -16,6 +18,7 @@ cool_php_fpm:
         - cool_mysql
 
 cool_mysql:
-    image: mysql
+    image: mysql:5.5
+    container_name: mysql
     environment:
     - MYSQL_ROOT_PASSWORD=123456

@@ -1,6 +1,6 @@
 <?php
 
-$servername = "cool_mysql";
+$servername = "mysql";
 $username = "root";
 $password = "123456";
 
